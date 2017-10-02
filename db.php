@@ -49,7 +49,7 @@ function insert_paste() {
       $host  = $_SERVER['HTTP_HOST'];
       $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
       $extra = 'paste.php';
-      header("Location: http://$host$uri/$extra?id=$id");
+      header("Location: http://$host$uri/$extra?id=$id");    #Redirect to created paste
       
    }
    else {
