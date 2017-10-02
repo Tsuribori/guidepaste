@@ -1,8 +1,6 @@
 <?php
 
 require "config.php";
-require_once "paste.php";
-#require "index.php";
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 #Create database if it doesn't exist
@@ -11,7 +9,7 @@ function create_database() {
     $db = "";
 
     if ($db  = new SQLite3($database_name . ".db")){
-        $db->exec("CREATE TABLE text (id INTEGER PRIMARY KEY, paste TEXT, )"); #Create table and columns
+        $db->exec('CREATE TABLE text (id INTEGER PRIMARY KEY, paste TEXT)'); #Create table and columns
 	echo "success";
         $create_values = $db->prepare("INSERT INTO text (id, paste) VALUES (1, 'FIRST')"); #Create the first row so that insert_paste() works
         $create_values->execute();
@@ -46,11 +44,9 @@ function insert_paste() {
    $statement2->bindValue(2, $paste);  
    if ($result = $statement2->execute()) {    #Execute the statement
       $id = $id;
-      $host  = $_SERVER['HTTP_HOST'];
-      $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-      $extra = 'paste.php';
-      header("Location: http://$host$uri/$extra?id=$id");
-      
+      global $header_var;
+      header($header_var . "paste.php?id=" . $id); #Redirect to paste page
+      exit; 
    }
    else {
       echo "Could not insert paste into database!";

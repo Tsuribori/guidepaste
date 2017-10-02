@@ -12,4 +12,8 @@ $html_header =
 
 $html_end =
 "</html>";
+$host = $_SERVER['HTTP_HOST'];
+$uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+
+$header_var = "Location: http://$host$uri/;
 ?>

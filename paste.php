@@ -1,10 +1,13 @@
 <?php
 require_once "config.php";
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+
 global $database_name;
-$db = new SQLite3($database_name . ".db");
 global $html_header;
 global $html_end;
-   $id = $_GET["id"];
+if ($id = $_GET["id"]) {
+   $db = new SQLite3($database_name . ".db");
    $statement3 = $db->prepare("SELECT paste FROM text WHERE id = ?");
    $statement3->bindValue(1, $id, PDO::PARAM_INT);
    if ($content = $statement3->execute()) {
@@ -15,6 +18,6 @@ global $html_end;
        echo $html_end;
        
    }
-
+}
 ?>
 
