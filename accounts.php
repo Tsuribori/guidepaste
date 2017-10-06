@@ -1,5 +1,6 @@
 <?php
 require "config.php";
+require "account_management.php";
 if ($_GET["id"] == "register") {    #Display registering page if requested
   echo $html_header;
   echo $register_page;

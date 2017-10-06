@@ -1,5 +1,6 @@
 <?php
 require "config.php";
+require "account_management.php";
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -11,11 +12,15 @@ else if ($_GET["id"] == "login") {  #Else if call login function if requested by
    log_in();
 }
 
+else if ($_GET["id"] == "logout") { #Destroy login cookies if requested
+   log_out();
+}
+
 function make_account() {   #Create new account
    global $database_name;
    $name = $_POST["name"];
    $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
-   $db = new SQLite3($database_name . ".db");
+   $db = new SQLite3($database_name.".db");
    $check_name = $db->prepare("SELECT name FROM users WHERE name = ?"); #Check if name already in use
    $check_name->bindValue(1, $name);
    $name_in_use = $check_name->execute();
@@ -45,33 +50,33 @@ function log_in () {     #Log the user in
    global $header_var;
    $name = $_POST["name"];
    $password = $_POST["password"];
-   $db = new SQLite3($database_name . ".db");
-   $get_password = $db->prepare("SELECT password FROM users WHERE name = ?");
-   $get_password->bindValue(1, $name);
-   if ($database_pass = $get_password->execute()) {   #Check if the password is correct
-      $database_pass2 = $database_pass->fetchArray();
-      $database_pass3 = $database_pass2["password"];
-      if (password_verify($password, $database_pass3)) {
+   if (verify_user($name, $password)) {
          setcookie("Login", $name, time() + 1600);
          setcookie("Password", $password, time() + 1600);
          header($header_var . "account.php?id=" . $name);
          exit;
       }
       
-      else {
-         echo $wrongpass;
+   else {
+         echo "wrong";
          exit();
       }
-  }   
-  else {
-      exit();
-  }   
-}
-
-
+}  
 function log_out () {
+   if ((isset($_COOKIE["Login"])) && (isset($_COOKIE["Password"]))) {   #Destroy cookies and redirect to main page
+      global $header_var;
+      unset($_COOKIE["Login"]);
+      unset($_COOKIE["Password"]);
+      setcookie("Login", "", time() - 3600);
+      setcookie("Password", "", time() - 3600);
+      header($header_var . "index.php");
+   }
+  
+  else {
+      echo "Could not logout";
    
-}     
+  }     
+}
 
 ?>
       

@@ -6,7 +6,7 @@ ini_set('display_errors', 1);
 function create_database() {
     global $database_name;
     $db = "";
-    if ($db  = new SQLite3($database_name . ".db")){
+    if ($db  = new SQLite3($database_name . ".db")) {
         $db->exec('CREATE TABLE users (name TEXT PRIMARY KEY, password TEXT)');
         $db->exec('CREATE TABLE text (id INTEGER PRIMARY KEY, paste TEXT, name TEXT)'); #Create table and columns
 	echo "success";
@@ -58,6 +58,9 @@ function insert_paste() {
       echo "Could not insert paste into database!";
    }
 }
+
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
    insert_paste();
    
