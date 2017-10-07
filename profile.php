@@ -40,7 +40,7 @@ function make_account() {   #Create new account
          setcookie("Login", $name, time() + 1600);  #Set the "logged in" cookie
          setcookie("Password", $password, time() + 1600);
          header($header_var . "account.php?id=" . $name);      #Redirect to account page
-         exit;
+         exit();
       }
    }
 }
@@ -54,7 +54,7 @@ function log_in () {     #Log the user in
          setcookie("Login", $name, time() + 1600);
          setcookie("Password", $password, time() + 1600);
          header($header_var . "account.php?id=" . $name);
-         exit;
+         exit();
       }
       
    else {
@@ -70,6 +70,7 @@ function log_out () {
       setcookie("Login", "", time() - 3600);
       setcookie("Password", "", time() - 3600);
       header($header_var . "index.php");
+      exit();
    }
   
   else {

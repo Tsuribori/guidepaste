@@ -1,5 +1,6 @@
 <?php
 require "config.php";
+require "account_management.php";
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 #Create database if it doesn't exist
@@ -39,7 +40,7 @@ function insert_paste() {
    $id = intval($desired_id["id"]) + 1; #Get the new id
    $paste = $_POST["paste"];
    $statement2 = $db->prepare("INSERT INTO text (id, paste, name) VALUES (?, ?, ?)"); #Prepare insert statement
-   if (($_COOKIE["Login"]) && ($_COOKIE["Password"])) {
+   if (verify_user($_COOKIE["Login"], $_COOKIE["Password"])) {
       $name = $_COOKIE["Login"];
    }
    else {
@@ -50,6 +51,8 @@ function insert_paste() {
    $statement2->bindValue(3, $name); 
    if ($result = $statement2->execute()) {    #Execute the statement
       $id = $id;
+      $db->close();
+      unset($db);
       global $header_var;
       header($header_var . "paste.php?id=" . $id); #Redirect to paste page
       exit; 

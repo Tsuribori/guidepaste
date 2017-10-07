@@ -16,7 +16,7 @@ $host = $_SERVER['HTTP_HOST'];
 $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 
 $header_var = "Location: http://$host$uri/";
-
+$host_var = "http://$host$uri/";
 $register_page = "<form action='profile.php?id=register' enctype='multipart/form-data' method='POST'/>
    <input type='text' name='name'/>
    <input type='password' name='password'/>
