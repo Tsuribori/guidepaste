@@ -1,9 +1,10 @@
 <?php
 require "config.php";
 require "account_management.php";
+session_start();
 
-if (verify_user($_GET["id"], $_COOKIE["Password"])) {
-   $account = $_GET["id"];
+if (isset($_SESSION["confirmation"])) {
+   $account = $_SESSION["confirmation"];
    echo $html_header;
    get_user_pastes($account);
    echo $html_end;

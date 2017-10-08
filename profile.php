@@ -3,6 +3,7 @@ require "config.php";
 require "account_management.php";
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+session_start();
 
 if ($_GET["id"] == "register") {   #Call register function if requested by accounts.php
    make_account();
@@ -12,7 +13,7 @@ else if ($_GET["id"] == "login") {  #Else if call login function if requested by
    log_in();
 }
 
-else if ($_GET["id"] == "logout") { #Destroy login cookies if requested
+else if ($_GET["id"] == "logout") { #Destroy login session if requested
    log_out();
 }
 
@@ -36,9 +37,8 @@ function make_account() {   #Create new account
       if ($registered = $register_statement->execute()) {
          global $header_var;
          $name = $name;
-         $password = $password;
-         setcookie("Login", $name, time() + 1600);  #Set the "logged in" cookie
-         setcookie("Password", $password, time() + 1600);
+         session_start();
+         $_SESSION["confirmation"] = $name;
          header($header_var . "account.php?id=" . $name);      #Redirect to account page
          exit();
       }
@@ -51,8 +51,8 @@ function log_in () {     #Log the user in
    $name = $_POST["name"];
    $password = $_POST["password"];
    if (verify_user($name, $password)) {
-         setcookie("Login", $name, time() + 1600);
-         setcookie("Password", $password, time() + 1600);
+         session_start();
+         $_SESSION["confirmation"] = $name;
          header($header_var . "account.php?id=" . $name);
          exit();
       }
@@ -63,12 +63,9 @@ function log_in () {     #Log the user in
       }
 }  
 function log_out () {
-   if ((isset($_COOKIE["Login"])) && (isset($_COOKIE["Password"]))) {   #Destroy cookies and redirect to main page
+   if (isset($_SESSION["confirmation"])) {   #Destroy session variables and redirect to main page
       global $header_var;
-      unset($_COOKIE["Login"]);
-      unset($_COOKIE["Password"]);
-      setcookie("Login", "", time() - 3600);
-      setcookie("Password", "", time() - 3600);
+      session_destroy();
       header($header_var . "index.php");
       exit();
    }

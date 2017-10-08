@@ -1,11 +1,11 @@
 <?php
-function verify_user($name, $password) {    #Verify the user by comparing the password in the "password" cookie to the one in database
+function verify_user($name, $password) {    #Verify the user by comparing the password to the on in the database 
    global $database_name;
    global $db;
    if ($db == NULL) {
-      $db = new SQLite3($database_name . ".db");
+      $db = new SQLite3($database_name . ".db");  #Sphagetti solution for when $db is set or not set 
    }
-   $verify_statement = $db->prepare("SELECT password FROM users WHERE name = ?");  #Get the password which matches the name in the "name" cookie
+   $verify_statement = $db->prepare("SELECT password FROM users WHERE name = ?");  #Get the password which matches the name  
    $verify_statement->bindValue(1, $name);
    if ($pass_array = $verify_statement->execute()) {
       $pass = $pass_array->fetchArray();

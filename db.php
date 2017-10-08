@@ -3,6 +3,7 @@ require "config.php";
 require "account_management.php";
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+session_start();
 #Create database if it doesn't exist
 function create_database() {
     global $database_name;
@@ -40,8 +41,8 @@ function insert_paste() {
    $id = intval($desired_id["id"]) + 1; #Get the new id
    $paste = $_POST["paste"];
    $statement2 = $db->prepare("INSERT INTO text (id, paste, name) VALUES (?, ?, ?)"); #Prepare insert statement
-   if (verify_user($_COOKIE["Login"], $_COOKIE["Password"])) {
-      $name = $_COOKIE["Login"];
+   if ($_SESSION["confirmation"]) {
+      $name = $_SESSION["confirmation"];
    }
    else {
       $name = "Anonymous";

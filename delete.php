@@ -2,14 +2,15 @@
 
 require "config.php";
 require "account_management.php";
+session_start();
 
-if ($_GET["id"] && $_COOKIE["Login"] && $_COOKIE["Password"]) {
+if ($_GET["id"] && $_SESSION["confirmation"]) {
     $db = new SQLite3($database_name . ".db");
     $search_paste_owner = $db->prepare("SELECT name FROM text WHERE id = ?");
     $search_paste_owner->bindValue(1, $_GET["id"]);
     if ($search_result = $search_paste_owner->execute()) {
         $owner = $search_result->fetchArray();
-        if (($owner["name"] == $_COOKIE["Login"]) && (verify_user($owner["name"], $_COOKIE["Password"]))) {
+        if ($owner["name"] == $_SESSION["confirmation"]) {
             $db->close();
             unset($db);
             delete_paste($_GET["id"], $owner["name"]);
