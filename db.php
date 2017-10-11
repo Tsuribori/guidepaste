@@ -9,12 +9,12 @@ function create_database() {
     global $database_name;
     $db = "";
     if ($db  = new SQLite3($database_name . ".db")) {
-        $db->exec('CREATE TABLE users (name TEXT PRIMARY KEY, password TEXT)');
-        $db->exec('CREATE TABLE text (id INTEGER PRIMARY KEY, paste TEXT, name TEXT)'); #Create table and columns
+        $db->exec('CREATE TABLE users (name TEXT PRIMARY KEY, password TEXT NOT NULL)');
+        $db->exec('CREATE TABLE text (id INTEGER PRIMARY KEY, paste TEXT NOT NULL, title TEXT NOT NULL, name TEXT NOT NULL)'); #Create table and columns
 	echo "success";
-        $create_values = $db->prepare("INSERT INTO users (name, password) VALUES ('FirstUser', 'umadelicia')");
+        $create_values = $db->prepare("INSERT INTO users (name, password) VALUES ('Anonymous', 'umadelicia')");
         $create_values->execute();
-        $create_values2 = $db->prepare("INSERT INTO text (id, paste) VALUES (1, 'FIRST')"); #Create the first row so that insert_paste() works
+        $create_values2 = $db->prepare("INSERT INTO text (id, paste, title, name) VALUES (1, 'FIRST', 'FIRST', 'FIRST')"); #Create the first row so that insert_paste() works
         $create_values2->execute();
         
     }
@@ -40,7 +40,8 @@ function insert_paste() {
    $desired_id = $last_id->fetchArray();
    $id = intval($desired_id["id"]) + 1; #Get the new id
    $paste = $_POST["paste"];
-   $statement2 = $db->prepare("INSERT INTO text (id, paste, name) VALUES (?, ?, ?)"); #Prepare insert statement
+   $title = $_POST["title"];
+   $statement2 = $db->prepare("INSERT INTO text (id, paste, title, name) VALUES (?, ?, ?, ?)"); #Prepare insert statement
    if ($_SESSION["confirmation"]) {
       $name = $_SESSION["confirmation"];
    }
@@ -49,7 +50,8 @@ function insert_paste() {
    }
    $statement2->bindValue(1, $id, PDO::PARAM_INT);  #Bind parameters to statement
    $statement2->bindValue(2, $paste);
-   $statement2->bindValue(3, $name); 
+   $statement2->bindValue(3, $title);
+   $statement2->bindValue(4, $name); 
    if ($result = $statement2->execute()) {    #Execute the statement
       $id = $id;
       $db->close();
@@ -59,7 +61,7 @@ function insert_paste() {
       exit; 
    }
    else {
-      echo "Could not insert paste into database!";
+      die("Could not insert paste into database!");
    }
 }
 

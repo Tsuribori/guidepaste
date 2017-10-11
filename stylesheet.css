@@ -1,0 +1,24 @@
+#pastediv {
+    margin-top: 3%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+#header {
+    text-align: left;
+    width: 50%;
+    height: 3%;
+    display: inline-block;
+}
+
+#account_buttons {
+    text-align: right;
+    width: 30%;
+    height: 3%;
+    display: inline-block;
+}
+
+#empty_space {
+   display: inline-block;
+   width: 10%;
+}

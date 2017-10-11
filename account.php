@@ -20,14 +20,17 @@ function get_user_pastes() {
    global $account;
    global $host_var;
    $db = new SQLite3($database_name . ".db");
-   $paste_statement = $db->prepare("SELECT id, paste FROM text WHERE name = ?");
+   $paste_statement = $db->prepare("SELECT id, paste, title FROM text WHERE name = ?");
    $paste_statement->bindValue(1, $account);
    if ($pastes = $paste_statement->execute()) {
      while ($result = $pastes->fetchArray(SQLITE3_ASSOC)) {
            #var_export($result);
+           $pasteid= $result["id"];
+           echo "<div id=$pasteid">
+           echo $result["title"];
            echo $result["paste"];
            echo "<a href=$host_var" . "paste.php?id=" . $result["id"] . ">Paste page</a>";
-           echo "<a href=$host_var" . "delete.php?id=" . $result["id"] . ">Delete</a>";
+           echo "<a href=$host_var" . "delete.php?id=" . $result["id"] . ">Delete</a> </div>";
      }
       
    }
