@@ -6,7 +6,15 @@ ini_set('display_errors', 1);
 session_start();
 
 if ($_GET["id"] == "register") {   #Call register function if requested by accounts.php
-   make_account();
+   if ($_POST["password"] === $_POST["password2"]) {
+       make_account();
+   }
+   
+   else {
+       error_message("Passwords do not match!");
+       exit();
+   }
+       
 }
 
 else if ($_GET["id"] == "login") {  #Else if call login function if requested by accounts.php
@@ -28,7 +36,8 @@ function make_account() {   #Create new account
    $name_check = $name_in_use->fetchArray();
    $name_in_use2 = $name_check["name"];
    if (strcmp($name, $name_in_use2) == 0) {
-      die("Username already taken");
+      error_message("Username already taken");
+      exit();
    }
    else {            #Else create the new account
       $register_statement = $db->prepare("INSERT INTO users (name, password) VALUES (?,?)");
@@ -58,7 +67,7 @@ function log_in () {     #Log the user in
       }
       
    else {
-         echo "wrong";
+         error_message("Incorrect password.");
          exit();
       }
 }  
@@ -71,7 +80,7 @@ function log_out () {
    }
   
   else {
-      echo "Could not logout";
+      error_message("Could not logout");
    
   }     
 }

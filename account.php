@@ -26,7 +26,7 @@ function get_user_pastes() {
      while ($result = $pastes->fetchArray(SQLITE3_ASSOC)) {
            #var_export($result);
            $pasteid= $result["id"];
-           echo "<div id=$pasteid">
+           echo "<div id=$pasteid>";
            echo $result["title"];
            echo $result["paste"];
            echo "<a href=$host_var" . "paste.php?id=" . $result["id"] . ">Paste page</a>";
