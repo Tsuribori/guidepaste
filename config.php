@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 $websitename = "Test";
 $database_name = "pastedatabase";
 $html_header = 
@@ -7,6 +7,7 @@ $html_header =
 <html>
 <head>
 <meta charset=utf-8>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
 <link rel='stylesheet' type='text/css' href='stylesheet.css'>
 </head>
 <body>";
@@ -20,11 +21,30 @@ $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 $header_var = "Location: http://$host$uri/";
 $host_var = "http://$host$uri/";
 
-$page_header = "<header id='header'><h3 id='name'>$websitename</h3>
+$logged_in = "<header id='header'>
+       <h2 id='name'><a id='namelink' href='".$host_var."index.php'>$websitename</a></h2>
+       <div id='headerbuttons'>
+       <input type='button' id='headerbutton' onclick=\"location.href='".$host_var."account.php?id=" . $_SESSION["confirmation"]."';\" value='" . $_SESSION["confirmation"]. "'/>
+      <input type='button' id='headerbutton' onclick=\"location.href='".$host_var."profile.php?id=logout';\" value='Log out'/>
+      </div>
+      </header>";
+
+$not_logged_in = "<header id='header'>
+       <h2 id='name'><a id='namelink' href='".$host_var."index.php'>$websitename</a></h2>
        <div id='headerbuttons'>
        <input type='button' id='headerbutton' onclick=\"location.href='".$host_var."accounts.php?id=login';\" value='Login'/>
-      <input type='button' id='headerbutton' onclick=\"location.href='".$host_var."accounts.php?id=register';\" value='Register'/> </div>
+       <input type='button' id='headerbutton' onclick=\"location.href='".$host_var."accounts.php?id=register';\" value='Register'/> </div>
       </header>";
+
+if (isset($_SESSION["confirmation"])) {
+   $page_header = $logged_in;
+}
+
+else {
+   $page_header = $not_logged_in;
+}
+
+
 $index_page = "<div id=pastediv>
     <p>Title:</p>
     <input type='text' name='title' required maxlenght='150' form='pasteform'/>
