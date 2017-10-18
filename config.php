@@ -23,6 +23,9 @@ $host_var = "http://$host$uri/";
 
 $logged_in = "<header id='header'>
        <h2 id='name'><a id='namelink' href='".$host_var."index.php'>$websitename</a></h2>
+       <div id='newpaste_button_div'>
+       <input type='button' id='newpaste_button' onclick=\"location.href='".$host_var."index.php';\" value='New paste'/>
+       </div>
        <div id='headerbuttons'>
        <input type='button' id='headerbutton' onclick=\"location.href='".$host_var."account.php?id=" . $_SESSION["confirmation"]."';\" value='" . $_SESSION["confirmation"]. "'/>
       <input type='button' id='headerbutton' onclick=\"location.href='".$host_var."profile.php?id=logout';\" value='Log out'/>
@@ -31,6 +34,9 @@ $logged_in = "<header id='header'>
 
 $not_logged_in = "<header id='header'>
        <h2 id='name'><a id='namelink' href='".$host_var."index.php'>$websitename</a></h2>
+       <div id='newpaste_button_div'>
+       <input type='button' id='newpaste_button' onclick=\"location.href='".$host_var."index.php';\" value='New paste'/>
+       </div>
        <div id='headerbuttons'>
        <input type='button' id='headerbutton' onclick=\"location.href='".$host_var."accounts.php?id=login';\" value='Login'/>
        <input type='button' id='headerbutton' onclick=\"location.href='".$host_var."accounts.php?id=register';\" value='Register'/> </div>
@@ -56,7 +62,15 @@ $index_page = "<div id=pastediv>
     </form> </div> </div>
 
 ";
-$register_page = "<div id='login_div'>
+$register_page = "<div id='login_notice'>
+   <h4>Why register?</h4>
+   <ul>
+   <li>Keep track of your pastes.</li>
+   <li>Delete pastes.</li>
+   <li>No CAPCTHA.</li>
+   </ul>
+   </div>
+   <div id='login_div'>
    <form action='profile.php?id=register' id='register_form' enctype='multipart/form-data' method='POST'/>
    <p>Username: </p><input type='text' name='name'/>
    <p>Password: </p><input type='password' name='password'/>
