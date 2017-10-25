@@ -19,33 +19,35 @@ else {
 function get_user_pastes() {
    global $html_header;
    global $page_header;
+   global $page_footer;
    global $html_end;
    global $database_name;
    global $account;
    global $host_var;
    $db = new SQLite3($database_name . ".db");
-   $paste_statement = $db->prepare("SELECT id, paste, title FROM text WHERE name = ?");
+   $paste_statement = $db->prepare("SELECT id, title FROM text WHERE name = ?");
    $paste_statement->bindValue(1, $account);
    
-   if ($pastes = $paste_statement->execute()) {
-       while ($result = $pastes->fetchArray(SQLITE3_ASSOC)) {
-           var_export($result);
-           $pasteid = $result["id"];
+   if ($pastes = $paste_statement->execute()) { #Check if user has any pastes
+       if (!($result = $pastes->fetchArray(SQLITE3_ASSOC))) {
+               error_message("Nothing here!");
+          }
+       
+       else {
+           $pastes = $paste_statement->execute(); #Need to call this again or the first paste won't be shown for some reason
            echo $html_header;
            echo $page_header;
-           echo "<div id='user_pastes'>";
-           echo "<h3>".$result["title"]."</h3>";
-           echo "<div id='user_page_links0'><a id='user_page_links' href=$host_var" . "paste.php?id=" . $result["id"] . ">View</a>";
-           echo "   ";
-           echo "<a id='user_page_links' href=$host_var" . "delete.php?id=" . $result["id"] . ">Delete</a> </div></div>";           echo $html_end;
-       }
-
-       if (!($result = $pastes->fetchArray(SQLITE3_ASSOC))) {   #If user has no pastes in db, inform them (Check if db query gives a false)
-           error_message("Nothing here!");
-       }
-       
+           while ($result = $pastes->fetchArray(SQLITE3_ASSOC)) {  #Loop through all the pastes
+               display_user_pastes($result);
+               
+           } 
         
-   }
+             
+           echo $page_footer;
+           echo $html_end;
+       
+        }
+    }
     
    
    else {

@@ -1,8 +1,6 @@
 <?php
 require "config.php";
 require "account_management.php";
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 session_start();
 
 if ($_GET["id"] == "register") {   #Call register function if requested by accounts.php
@@ -39,6 +37,12 @@ function make_account() {   #Create new account
       error_message("Username already taken");
       exit();
    }
+   
+   elseif (strcmp($name, "Anonymous") == 0) {   #Prevent people from gaining access to the 'Anonymous' pastes
+      error_message("Name not allowed!");
+      exit();
+   }
+   
    else {            #Else create the new account
       $register_statement = $db->prepare("INSERT INTO users (name, password) VALUES (?,?)");
       $register_statement->bindValue(1, $name);
@@ -62,7 +66,7 @@ function log_in () {     #Log the user in
    if (verify_user($name, $password)) {
          session_start();
          $_SESSION["confirmation"] = $name;
-         header($header_var . "account.php?id=" . $name);
+         header($header_var . "account.php");
          exit();
       }
       

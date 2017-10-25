@@ -34,7 +34,7 @@ html, body {
     text-align: center;
     padding-top: 5%;
     padding-bottom: 5%;
-    
+   
 }
 
 #pastebutton {
@@ -64,7 +64,6 @@ html, body {
 #name {
     display: inline-block;
     padding-left: 10%;
-    border
 }
 
 #newpaste_button_div {
@@ -127,12 +126,19 @@ html, body {
    margin-left: 30%;
    border-style: solid;
    border-width: 2px;
-   background-color: #72bcd4;    
+   background-color: #7f7fff;    
 }
 
 #login_button {
    padding-top: 5%;
    padding-bottom: 5%;
+}
+
+#footer { 
+   text-align: center;
+   margin-top: 3%;
+   margin-bottom: 2%;
+   font-size: 15px;
 }
 
 #user_pastes {

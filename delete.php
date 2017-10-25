@@ -38,7 +38,7 @@ function delete_paste($id, $account_name) {
     }
    
     else {
-        echo "Couldn't delete paste";
+        error_message("Couldn't delete paste");
     }
 }
 

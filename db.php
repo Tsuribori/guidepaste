@@ -1,8 +1,7 @@
 <?php
 require "config.php";
 require "account_management.php";
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+
 session_start();
 #Create database if it doesn't exist
 function create_database() {
@@ -12,7 +11,7 @@ function create_database() {
         $db->exec('CREATE TABLE users (name TEXT PRIMARY KEY, password TEXT NOT NULL)');
         $db->exec('CREATE TABLE text (id INTEGER PRIMARY KEY, paste TEXT NOT NULL, title TEXT NOT NULL, name TEXT NOT NULL)'); #Create table and columns
 	echo "success";
-        $create_values = $db->prepare("INSERT INTO users (name, password) VALUES ('Anonymous', 'umadelicia')");
+        $create_values = $db->prepare("INSERT INTO users (name, password) VALUES ('FIRSTUSER', 'umadelicia')");
         $create_values->execute();
         $create_values2 = $db->prepare("INSERT INTO text (id, paste, title, name) VALUES (1, 'FIRST', 'FIRST', 'FIRST')"); #Create the first row so that insert_paste() works
         $create_values2->execute();
@@ -39,8 +38,8 @@ function insert_paste() {
    }
    $desired_id = $last_id->fetchArray();
    $id = intval($desired_id["id"]) + 1; #Get the new id
-   $paste = $_POST["paste"];
-   $title = $_POST["title"];
+   $paste = htmlspecialchars($_POST["paste"]);
+   $title = htmlspecialchars($_POST["title"]);
    $statement2 = $db->prepare("INSERT INTO text (id, paste, title, name) VALUES (?, ?, ?, ?)"); #Prepare insert statement
    if ($_SESSION["confirmation"]) {
       $name = $_SESSION["confirmation"];
@@ -58,10 +57,10 @@ function insert_paste() {
       unset($db);
       global $header_var;
       header($header_var . "paste.php?id=" . $id); #Redirect to paste page
-      exit; 
+      exit(); 
    }
    else {
-      die("Could not insert paste into database!");
+      error_message("Could not insert paste into database!");
    }
 }
 

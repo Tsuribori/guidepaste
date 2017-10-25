@@ -1,7 +1,5 @@
 <?php
 require_once "config.php";
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
 
 global $database_name;
 global $html_header;
@@ -18,6 +16,7 @@ if (($id = $_GET["id"]) !== NULL) { #Get paste that matches page url
        echo $page_header;
        echo "<div id='pastepage_paste'><h2>".$paste_title."</h2>";
        echo "<p>".$paste_content."</p></div>";  #Echo paste
+       echo $page_footer;
        echo $html_end;
        exit();
     }
