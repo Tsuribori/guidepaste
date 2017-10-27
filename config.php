@@ -59,7 +59,8 @@ $page_footer= "<footer id='footer'>
 $index_page = "<div id=pastediv>
     <p>Title:</p>
     <input type='text' name='title' required size='30' maxlenght='150' form='pasteform'/>
-    <p>Text:</p> 
+    <p>Text:</p>
+    <input type='checkbox' id='code' name='iscode' value='iscode' form='pasteform'/> <p id='code'>Code</p>
     <textarea form='pasteform' id='paste_text_area' rows='50' maxlenght='3116480' required name='paste'></textarea>
     <div id='formpaste'>
     <form action='db.php' id='pasteform' enctype='multipart/form-data' name='pasteform' method='POST'>    
