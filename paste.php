@@ -6,17 +6,17 @@ global $html_header;
 global $html_end;
 if (($id = $_GET["id"]) !== NULL) { #Get paste that matches page url
    $db = new SQLite3($database_name . ".db");
-   $statement3 = $db->prepare("SELECT paste, title, code FROM text WHERE id = ?");
+   $statement3 = $db->prepare("SELECT paste, title, code, date FROM text WHERE id = ?");
    $statement3->bindValue(1, $id, PDO::PARAM_INT);
    if (($content = $statement3->execute()) && ($content = $content->fetchArray())) { #Execute statement and check if it's not false
        $paste_title = $content["title"];
        $paste_content0 = $content["paste"];
+       $paste_date = $content["date"];
        $paste_content = str_replace("\n", "<br>", $paste_content0); #Replace newline with html newline break
        
        echo $html_header;
        echo $page_header;
-       echo "<div id='pastepage_paste'><h2>".$paste_title."</h2>";
-       if ($content["code"] === 0) {
+       echo "<div id='pastepage_title'><h2>".$paste_title."</h2><p>Created ".$paste_date."</p></div><div id='pastepage_paste'>";      if ($content["code"] === 0) {
        echo "<p>".$paste_content."</p></div>";
        }
        elseif ($content["code"] === 1) {

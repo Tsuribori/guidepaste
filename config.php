@@ -116,8 +116,10 @@ function display_user_pastes($result) {
     global $host_var; 
     echo "<div id='user_pastes'>
          <h3>".$result["title"]."</h3>         
-         <div id='user_page_links0'><a id='user_page_links' href='$host_var" . "paste.php?id=" . $result["id"] . "'>View</a>    " .  
-
+         <p id='user_page_date'>".$result["date"]."</p>
+         
+         <div id='user_page_links0'>
+         <a id='user_page_links' href='$host_var" . "paste.php?id=" . $result["id"] . "'>View</a>    " .  
          "<a id='user_page_links' onclick=\"return confirm('Are you sure?');\" href='$host_var" . "delete.php?id=" . $result["id"] . "'>Delete</a> </div></div>";  
 }
    

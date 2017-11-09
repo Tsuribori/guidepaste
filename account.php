@@ -25,7 +25,7 @@ function get_user_pastes() {
    global $account;
    global $host_var;
    $db = new SQLite3($database_name . ".db");
-   $paste_statement = $db->prepare("SELECT id, title FROM text WHERE name = ?");
+   $paste_statement = $db->prepare("SELECT id, title, date FROM text WHERE name = ?");
    $paste_statement->bindValue(1, $account);
    
    if ($pastes = $paste_statement->execute()) { #Check if user has any pastes

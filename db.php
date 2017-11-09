@@ -19,7 +19,8 @@ function create_database() {
         
     }
    else {
-        die("Unable to create database!");
+        error_message("Unable to create database!");
+        exit();
     }
 }
 
@@ -37,6 +38,7 @@ function insert_paste() {
    }
    else {
       error_message("Could not get paste id!");
+      exit();
    }
    $desired_id = $last_id->fetchArray();
    $id = intval($desired_id["id"]) + 1; #Get the new id
@@ -74,6 +76,7 @@ function insert_paste() {
    }
    else {
       error_message("Could not insert paste into database!");
+      exit();
    }
 }
 

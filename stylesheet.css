@@ -15,7 +15,7 @@ html, body {
 
 #error_message {
     text-align: center;
-    padding-top: 10%;
+    padding-top: 5%;
 
 } 
 
@@ -169,19 +169,31 @@ html, body {
    color: #0000ff;
 }
 
+#user_page_date {
+   font-size: 13px; 
+}
+
 #paste_page_buttons {
    margin-left: 90%;   
+   display: inline-block;
+}
+
+#pastepage_title {
+   width: 80%;
+   margin-left: 10%;
+   margin-top: 5%;
+   font-size: 16px;
    display: inline-block;
 }
 
 #pastepage_paste {
    width: 80%;
    margin-left: 10%;
-   margin-top: 5%;
    margin-bottom: 5%;
    font-size: 16px;
    display: inline-block;
 }
+   
 
 #white_space_code { 
   white-space: pre-wrap;

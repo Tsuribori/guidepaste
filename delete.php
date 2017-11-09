@@ -14,13 +14,20 @@ if ($_GET["id"] && $_SESSION["confirmation"]) {
             $db->close();
             unset($db);
             delete_paste($_GET["id"], $owner["name"]);
+            exit();
         }
+        else {
+            error_message("You're not the owner!");
+            exit();
+        }
+        
     }
     
 }
 
 else {
    header($header_var . "accounts.php?id=login");
+   exit();
 }
     
 
@@ -39,6 +46,7 @@ function delete_paste($id, $account_name) {
    
     else {
         error_message("Couldn't delete paste");
+       
     }
 }
 
