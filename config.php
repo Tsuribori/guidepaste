@@ -3,6 +3,8 @@ session_start();
 $websitename = "Guidepaste";
 $database_name = "pastedatabase";
 error_reporting(-1);
+$max_chars = 20000; #Define character limit for pastes
+$max_title_chars = 500; #Define character limit for titles
 $html_header = 
 "<!DOCTYPE html>
 <html>
@@ -108,7 +110,7 @@ function error_message($error_reason) {
    global $html_end; 
    echo $html_header;
    echo $page_header;
-   echo "<h1 id='error_message'>$error_reason</h1>";
+   echo "<h2 id='error_message'>$error_reason</h2>";
    echo $page_footer;
    echo $html_end;
 }

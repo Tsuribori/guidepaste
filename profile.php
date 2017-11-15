@@ -42,7 +42,17 @@ function make_account() {   #Create new account
       error_message("Name not allowed!");
       exit();
    }
+
+   elseif (strlen($name) > 50) {
+      error_message("Name too long. Must be under 50 characters.");
+      exit();
+   }
    
+   elseif (strlen($_POST["password"]) > 50) {
+      error_message("Password too long! Must be under 50 characters.");
+      exit();
+   }
+
    else {            #Else create the new account
       $register_statement = $db->prepare("INSERT INTO users (name, password) VALUES (?,?)");
       $register_statement->bindValue(1, $name);
@@ -85,7 +95,7 @@ function log_out () {
   
   else {
       error_message("Could not logout");
-   
+      exit();
   }     
 }
 
