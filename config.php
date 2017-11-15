@@ -25,23 +25,24 @@ $host_var = "http://$host$uri/";
 $logged_in = "<header id='header'>
        <h2 id='name'><a id='namelink' href='".$host_var."index.php'>$websitename</a></h2>
        <div id='newpaste_button_div'>
-       <input type='button' id='newpaste_button' onclick=\"location.href='".$host_var."index.php';\" value='New paste'/>
+       <a id='newpaste_button' href='".$host_var."index.php'>New paste</a> 
        </div>
        <div id='headerbuttons'>
-       <input type='button' id='headerbutton' onclick=\"location.href='".$host_var."account.php?id=" . $_SESSION["confirmation"]."';\" value='" . $_SESSION["confirmation"]. "'/>
-      <input type='button' id='headerbutton' onclick=\"location.href='".$host_var."profile.php?id=logout';\" value='Log out'/>
-      </div>
-      </header>";
+       <a id='headerbutton' href='".$host_var."account.php'>Profile</a>
+       <a id='headerbutton' href='".$host_var."profile.php?id=logout'>Log out</a>
+       </div>
+       </header>";
 
 $not_logged_in = "<header id='header'>
        <h2 id='name'><a id='namelink' href='".$host_var."index.php'>$websitename</a></h2>
        <div id='newpaste_button_div'>
-       <input type='button' id='newpaste_button' onclick=\"location.href='".$host_var."index.php';\" value='New paste'/>
+       <a id='newpaste_button' href='".$host_var."index.php'>New paste</a>
        </div>
        <div id='headerbuttons'>
-       <input type='button' id='headerbutton' onclick=\"location.href='".$host_var."accounts.php?id=login';\" value='Login'/>
-       <input type='button' id='headerbutton' onclick=\"location.href='".$host_var."accounts.php?id=register';\" value='Register'/> </div>
-      </header>";
+       <a id='headerbutton' href='".$host_var."accounts.php?id=login'>Login</a>
+       <a id='headerbutton' href='".$host_var."accounts.php?id=register'>Register</a>
+       </div>
+       </header>";
 
 if (isset($_SESSION["confirmation"])) {
    $page_header = $logged_in;
