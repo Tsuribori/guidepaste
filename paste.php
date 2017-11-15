@@ -16,7 +16,8 @@ if (($id = $_GET["id"]) !== NULL) { #Get paste that matches page url
        
        echo $html_header;
        echo $page_header;
-       echo "<div id='pastepage_title'><h2>".$paste_title."</h2><p>Created ".$paste_date."</p></div><div id='pastepage_paste'>";      if ($content["code"] === 0) {
+       echo "<div id='pastepage_title'><h2>".$paste_title."</h2></div><div id='pastepage_date'><p>Created ".$paste_date."</p></div><div id='pastepage_paste'>";      
+       if ($content["code"] === 0) {
        echo "<p>".$paste_content."</p></div>";
        }
        elseif ($content["code"] === 1) {
