@@ -166,7 +166,7 @@ code {
 
 #user_page_links0 {
    padding-left: 90%;
-   display: inline-block;
+   display: inline-block; 
 }
 
 #user_page_links:visited {
@@ -185,9 +185,11 @@ code {
 #pastepage_title {
    width: 80%;
    margin-left: 10%;
+   margin-right: 10%;
    margin-top: 3%;
    font-size: 16px;
    display: inline-block;
+   word-wrap: break-word;
 }
 #pastepage_date {
    font-size: 14px;
@@ -199,11 +201,13 @@ code {
    margin-bottom: 5%;
    font-size: 16px;
    display: inline-block;
+   word-wrap: break-word;
 }
    
 
 #white_space_code { 
   white-space: pre-wrap;
   font-size: 14px; 
+  word-wrap: break-word;
 }
 
