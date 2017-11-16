@@ -3,7 +3,12 @@ require "config.php";
 require "account_management.php";
 session_start();
 
-if (isset($_SESSION["confirmation"])) {
+if (!overdue($_SESSION["time"])) {  #Desroy session if user has been on the site for more than 30 min
+   header($header_var . "profile.php?id=logout");
+   exit();
+}
+
+else if (isset($_SESSION["confirmation"])) {
    $account = $_SESSION["confirmation"];
    get_user_pastes($account);
    exit();

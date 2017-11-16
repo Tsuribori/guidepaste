@@ -21,4 +21,13 @@ function verify_user($name, $password) {    #Verify the user by comparing the pa
       return False;   #Else return False
     }
 }
+
+function overdue($time) {
+    if (1800 > (time() - $time)) {  #Return True when user has been on site for more than 30 min
+        return True;
+    }
+    else {
+	return False;
+    }
+}
 ?>

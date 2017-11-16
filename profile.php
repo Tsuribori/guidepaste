@@ -61,7 +61,8 @@ function make_account() {   #Create new account
          global $header_var;
          $name = $name;
          session_start();
-         $_SESSION["confirmation"] = $name;
+	 $_SESSION["confirmation"] = $name;
+	 $_SESSION["time"] = time();
          header($header_var . "account.php?id=" . $name);      #Redirect to account page
          exit();
       }
@@ -75,7 +76,8 @@ function log_in () {     #Log the user in
    $password = $_POST["password"];
    if (verify_user($name, $password)) {
          session_start();
-         $_SESSION["confirmation"] = $name;
+	 $_SESSION["confirmation"] = $name;
+	 $_SESSION["time"] = time();
          header($header_var . "account.php");
          exit();
       }
@@ -89,7 +91,7 @@ function log_out () {
    if (isset($_SESSION["confirmation"])) {   #Destroy session variables and redirect to main page
       global $header_var;
       session_destroy();
-      header($header_var . "index.php");
+      header($header_var . "accounts.php?id=login");
       exit();
    }
   
