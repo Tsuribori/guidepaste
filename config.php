@@ -12,6 +12,7 @@ $html_header =
 <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
 <link rel='stylesheet' type='text/css' href='stylesheet.css'>
+<link rel='shortcut icon' href='icon.ico'>
 </head>
 <body>";
 
@@ -64,7 +65,7 @@ $index_page = "<div id=pastediv>
     <input type='text' name='title' required size='30' maxlenght='150' form='pasteform'/>
     <p>Text:</p>
     <input type='checkbox' id='code' name='iscode' value='iscode' form='pasteform'/> <p id='code'>Code</p>
-    <textarea form='pasteform' id='paste_text_area' rows='50' maxlenght='3116480' required name='paste'></textarea>
+    <textarea form='pasteform' id='paste_text_area' rows='25' maxlenght='3116480' required name='paste'></textarea>
     <div id='formpaste'>
     <form action='db.php' id='pasteform' enctype='multipart/form-data' name='pasteform' method='POST'>    
     <button type='submit' id='pastebutton' value='Submit paste'>Submit paste</button>

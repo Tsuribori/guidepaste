@@ -120,23 +120,25 @@ code {
 }
 
 #login_notice {
-   width: 40%;
+   width: 30%;
    margin-top: 2%;
-   margin-left: 30%;
+   margin-left: 35%;
+   font-size: 12px;
 }
 
 
 #login_div {
-   width: 40%;
+   width: 30%;
    padding-top: 3%;
    padding-bottom: 3%;
    text-align: center; 
    margin-top: 4%;
    margin-bottom: 3%;
-   margin-left: 30%;
+   margin-left: 35%;
    border-style: solid;
    border-width: 2px;
-   background-color: #7f7fff;    
+   background-color: #7f7fff;
+   font-size: 14px;   
 }
 
 #login_button {
