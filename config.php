@@ -2,6 +2,7 @@
 session_start();
 $websitename = "Guidepaste";
 $database_name = "pastedatabase";
+
 error_reporting(-1);
 $max_chars = 20000; #Define character limit for pastes
 $max_title_chars = 500; #Define character limit for titles
@@ -103,28 +104,32 @@ $login_page = "<div id='login_div'>
    </div>
    </div>";
    
-
-function error_message($error_reason) {
-   global $html_header;
-   global $page_header;
-   global $page_footer;
-   global $html_end; 
-   echo $html_header;
-   echo $page_header;
-   echo "<h2 id='error_message'>$error_reason</h2>";
-   echo $page_footer;
-   echo $html_end;
+if (!function_exists('error_message')) {
+    function error_message($error_reason) {
+       global $html_header;
+       global $page_header;
+       global $page_footer;
+       global $html_end; 
+       echo $html_header;
+       echo $page_header;
+       echo "<h2 id='error_message'>$error_reason</h2>";
+       echo $page_footer;
+       echo $html_end;
+   }
 }
 
-function display_user_pastes($result) {
-    global $host_var; 
-    echo "<div id='user_pastes'>
-         <h3>".$result["title"]."</h3>         
-         <p id='user_page_date'>".$result["date"]."</p>
+if (!function_exists('display_user_pastes')) {
+
+    function display_user_pastes($result) {
+        global $host_var; 
+        echo "<div id='user_pastes'>
+             <h3>".$result["title"]."</h3>         
+             <p id='user_page_date'>".$result["date"]."</p>
          
-         <div id='user_page_links0'>
-         <a id='user_page_links' href='$host_var" . "paste.php?id=" . $result["id"] . "'>View</a>    " .  
-         "<a id='user_page_links' onclick=\"return confirm('Are you sure?');\" href='$host_var" . "delete.php?id=" . $result["id"] . "'>Delete</a> </div></div>";  
+             <div id='user_page_links0'>
+             <a id='user_page_links' href='$host_var" . "paste.php?id=" . $result["id"] . "'>View</a>    " .  
+         "   <a id='user_page_links' onclick=\"return confirm('Are you sure?');\" href='$host_var" . "delete.php?id=" . $result["id"] . "'>Delete</a> </div></div>";  
+    }
 }
    
 ?>

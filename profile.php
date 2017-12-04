@@ -1,9 +1,16 @@
 <?php
 require "config.php";
 require "account_management.php";
+require "create_database.php";
+#require "db.php";
 session_start();
 
-if ($_GET["id"] == "register") {   #Call register function if requested by accounts.php
+if (!file_exists($database_name.".db")) {
+    create_database();
+    make_account();
+}
+
+else if ($_GET["id"] == "register") {   #Call register function if requested by accounts.php
    if ($_POST["password"] === $_POST["password2"]) {
        make_account();
    }
@@ -60,10 +67,9 @@ function make_account() {   #Create new account
       if ($registered = $register_statement->execute()) {
          global $header_var;
          $name = $name;
-         session_start();
-	 $_SESSION["confirmation"] = $name;
+         $_SESSION["confirmation"] = $name;
 	 $_SESSION["time"] = time();
-         header($header_var . "account.php?id=" . $name);      #Redirect to account page
+	 header($header_var . "account.php?id=" . $name);      #Redirect to account page
          exit();
       }
    }
