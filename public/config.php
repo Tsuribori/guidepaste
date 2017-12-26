@@ -1,7 +1,7 @@
 <?php
 session_start();
 $websitename = "Guidepaste";
-$database_name = "pastedatabase";
+$database_name = "../pastedatabase";
 
 error_reporting(-1);
 $max_chars = 20000; #Define character limit for pastes

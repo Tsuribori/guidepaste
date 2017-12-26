@@ -8,7 +8,7 @@ function insert_paste() {
    global $database_name;
    global $max_chars;
    global $max_title_chars;
-   $db = "$database_name.db";
+   $db = $database_name . ".db";
    if (!file_exists($db)) {   #Create table if it doesn't exist
        create_database();
    }
