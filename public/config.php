@@ -18,7 +18,7 @@ $html_header =
 <meta name='rating' content='General'>
 <meta name='description' content='Post guides or other snippets of text to share easily to others!'>
 <meta name='subject' content='Share text!'>
-<title>$websitename</title>
+<title>$websitename - Share text!</title>
 <link rel='stylesheet' type='text/css' href='stylesheet.css'>
 <link rel='shortcut icon' href='icon.ico'>
 </head>
