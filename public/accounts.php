@@ -1,5 +1,5 @@
 <?php
-require "config.php";
+require_once "config.php";
 
 if ($_GET["id"] == "register") {    #Display registering page if requested
   echo $html_header;

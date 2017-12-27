@@ -1,9 +1,9 @@
 <?php
 session_start();
 $websitename = "Guidepaste";
-$database_name = "../pastedatabase";
+$database_name = "../pastedatabase";  #Name of the database, best to leave this alone
 
-error_reporting(-1);
+error_reporting(-1); #Report errors
 $max_chars = 20000; #Define character limit for pastes
 $max_title_chars = 500; #Define character limit for titles
 $html_header = 
@@ -11,7 +11,14 @@ $html_header =
 <html>
 <head>
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, shrink-to-fit=no'>
+<meta http-equiv='Content-Security-Policy' content=\"default-src 'self'\">
+<meta name='robots' content='index, follow'>
+<meta name='googlebot' content='index, follow'>
+<meta name='rating' content='General'>
+<meta name='description' content='Post guides or other snippets of text to share easily to others!'>
+<meta name='subject' content='Share text!'>
+<title>$websitename</title>
 <link rel='stylesheet' type='text/css' href='stylesheet.css'>
 <link rel='shortcut icon' href='icon.ico'>
 </head>
@@ -80,7 +87,6 @@ $register_page = "<div id='login_notice'>
    <ul>
    <li>Keep track of your pastes.</li>
    <li>Delete pastes.</li>
-   <li>No CAPCTHA.</li>
    </ul>
    </div>
    <div id='login_div'>

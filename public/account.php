@@ -1,6 +1,6 @@
 <?php
-require "config.php";
-require "account_management.php";
+require_once "config.php";
+require_once "account_management.php";
 session_start();
 
 if (!overdue($_SESSION["time"])) {  #Desroy session if user has been on the site for more than 30 min

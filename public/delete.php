@@ -1,7 +1,7 @@
 <?php
 
-require "config.php";
-require "account_management.php";
+require_once "config.php";
+require_once "account_management.php";
 session_start();
 
 if ($_GET["id"] && $_SESSION["confirmation"]) {

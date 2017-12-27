@@ -1,8 +1,7 @@
 <?php
-require "config.php";
-require "account_management.php";
-require "create_database.php";
-#require "db.php";
+require_once "config.php";
+require_once "account_management.php";
+require_once "create_database.php";
 session_start();
 
 if (!file_exists($database_name.".db")) {

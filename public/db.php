@@ -1,7 +1,14 @@
 <?php
-require "config.php";
-require "create_database.php";
+require_once "config.php";
+require_once "create_database.php";
 session_start();
+
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+   insert_paste();
+   
+}
 
 #Insert the paste
 function insert_paste() {
@@ -42,7 +49,7 @@ function insert_paste() {
    else {
        $code = 0;
    }
-   $statement2 = $db->prepare("INSERT INTO text (id, paste, title, name, code, date) VALUES (?, ?, ?, ?, ?, ?)"); #Prepare insert statement
+
    if ($_SESSION["confirmation"]) {
       $name = $_SESSION["confirmation"];
    }
@@ -51,6 +58,8 @@ function insert_paste() {
    }
  
    $date = date("d.m.Y, g:i a"); 
+	
+   $statement2 = $db->prepare("INSERT INTO text (id, paste, title, name, code, date) VALUES (?, ?, ?, ?, ?, ?)"); #Prepare insert statement
    $statement2->bindValue(1, $id, PDO::PARAM_INT);  #Bind parameters to statement
    $statement2->bindValue(2, $paste);
    $statement2->bindValue(3, $title);
@@ -72,9 +81,4 @@ function insert_paste() {
 }
 
 
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-   insert_paste();
-   
-}
 ?> 

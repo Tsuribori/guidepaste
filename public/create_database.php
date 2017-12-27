@@ -1,5 +1,5 @@
 <?php
-require "config.php";
+require_once "config.php";
 
 #Create databse if it doesn't exist
 function create_database() {

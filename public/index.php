@@ -1,6 +1,6 @@
 <?php
 
-require "config.php";
+require_once "config.php";
 
 echo $html_header;
 echo $page_header; 
