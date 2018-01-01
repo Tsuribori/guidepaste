@@ -57,8 +57,8 @@ function insert_paste() {
       $name = "Anonymous";
    }
  
-   $date = date("d.m.Y, g:i a"); 
-	
+   $date = date("d.m.Y, h:i a"); 
+   $date = $date . " " . date("T");	
    $statement2 = $db->prepare("INSERT INTO text (id, paste, title, name, code, date) VALUES (?, ?, ?, ?, ?, ?)"); #Prepare insert statement
    $statement2->bindValue(1, $id, PDO::PARAM_INT);  #Bind parameters to statement
    $statement2->bindValue(2, $paste);
